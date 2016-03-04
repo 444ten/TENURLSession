@@ -13,6 +13,7 @@
 		76BDE5481C88A3A000CB3A40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76BDE5461C88A3A000CB3A40 /* LaunchScreen.storyboard */; };
 		76BDE5551C88A4CC00CB3A40 /* TENStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BDE5531C88A4CC00CB3A40 /* TENStartViewController.m */; };
 		76BDE5561C88A4CC00CB3A40 /* TENStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76BDE5541C88A4CC00CB3A40 /* TENStartViewController.xib */; };
+		76BDE55C1C89864900CB3A40 /* TENBackgroundServerContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BDE55B1C89864900CB3A40 /* TENBackgroundServerContext.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		76BDE5521C88A4CC00CB3A40 /* TENStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TENStartViewController.h; sourceTree = "<group>"; };
 		76BDE5531C88A4CC00CB3A40 /* TENStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TENStartViewController.m; sourceTree = "<group>"; };
 		76BDE5541C88A4CC00CB3A40 /* TENStartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TENStartViewController.xib; sourceTree = "<group>"; };
+		76BDE55A1C89864900CB3A40 /* TENBackgroundServerContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TENBackgroundServerContext.h; sourceTree = "<group>"; };
+		76BDE55B1C89864900CB3A40 /* TENBackgroundServerContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TENBackgroundServerContext.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				76BDE5501C88A4B200CB3A40 /* GUI */,
+				76BDE5571C89861500CB3A40 /* Library */,
 			);
 			name = Source;
 			path = TENURLSession/Source;
@@ -102,6 +106,31 @@
 				76BDE5541C88A4CC00CB3A40 /* TENStartViewController.xib */,
 			);
 			path = TENStartViewController;
+			sourceTree = "<group>";
+		};
+		76BDE5571C89861500CB3A40 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				76BDE5581C89861500CB3A40 /* Contexts */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		76BDE5581C89861500CB3A40 /* Contexts */ = {
+			isa = PBXGroup;
+			children = (
+				76BDE5591C89861500CB3A40 /* TENBackgroundServerContext */,
+			);
+			path = Contexts;
+			sourceTree = "<group>";
+		};
+		76BDE5591C89861500CB3A40 /* TENBackgroundServerContext */ = {
+			isa = PBXGroup;
+			children = (
+				76BDE55A1C89864900CB3A40 /* TENBackgroundServerContext.h */,
+				76BDE55B1C89864900CB3A40 /* TENBackgroundServerContext.m */,
+			);
+			path = TENBackgroundServerContext;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,6 +205,7 @@
 			files = (
 				76BDE5551C88A4CC00CB3A40 /* TENStartViewController.m in Sources */,
 				76BDE53D1C88A3A000CB3A40 /* AppDelegate.m in Sources */,
+				76BDE55C1C89864900CB3A40 /* TENBackgroundServerContext.m in Sources */,
 				76BDE53A1C88A3A000CB3A40 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,6 +347,7 @@
 				76BDE54E1C88A3A000CB3A40 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import "TENStartViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -19,17 +21,9 @@
     UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];;
     self.window = window;
     
-    PDTLoginModel *loginModel = [PDTLoginModel new];
-    self.loginModel = loginModel;
-    
-    PDTStartupViewController *controller = [PDTStartupViewController new];
-    controller.loginModel = loginModel;
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
-    navigationController.navigationBarHidden = YES;
-    
-    window.rootViewController = navigationController;
+    window.rootViewController = [TENStartViewController new];
     [window makeKeyAndVisible];
+    
     return YES;
 }
 
