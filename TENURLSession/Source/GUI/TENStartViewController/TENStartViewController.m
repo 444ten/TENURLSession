@@ -13,7 +13,9 @@
 #import "TENBackgroundServerContext.h"
 
 @interface TENStartViewController () <PDTModelObserver>
-@property (strong, nonatomic)   IBOutlet UIImageView        *startImageView;
+@property (nonatomic, strong)   IBOutlet UIImageView    *topImageView;
+@property (nonatomic, strong)   IBOutlet UIImageView    *middleImageView;
+@property (nonatomic, strong)   IBOutlet UIImageView    *bottomImageView;
 
 @property (nonatomic, strong)   TENBackgroundServerContext  *backgroundServerContext;
 
@@ -26,14 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    TENStartModel *model = [TENStartModel new];
-    self.model = model;
-    
-    TENBackgroundServerContext *backgroundServerContext = [TENBackgroundServerContext new];
-    backgroundServerContext.model = model;
-    [backgroundServerContext execute];
-    
-    self.backgroundServerContext = backgroundServerContext;
+    self.model = [TENStartModel new];
 }
 
 #pragma mark -
@@ -44,12 +39,27 @@
 }
 
 #pragma mark -
+#pragma mark Action Handling
+
+- (IBAction)onLoad:(UIButton *)sender {
+    TENBackgroundServerContext *backgroundServerContext = [TENBackgroundServerContext new];
+    backgroundServerContext.model = self.model;
+    [backgroundServerContext execute];
+    
+    self.backgroundServerContext = backgroundServerContext;
+}
+
+#pragma mark -
 #pragma mark PDTModelObserver
 
 - (void)modelDidLoad:(id)model {
     if (model == self.model) {
+        TENStartModel *model = self.model;
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.startImageView.image = self.model.startImage;            
+            self.topImageView.image = model.topImage;
+            self.middleImageView.image = model.middleImage;
+            self.bottomImageView.image = model.bottomImage;
         });
 
     }

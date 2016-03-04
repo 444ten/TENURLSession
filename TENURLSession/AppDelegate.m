@@ -16,7 +16,6 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];;
     self.window = window;
@@ -26,6 +25,9 @@
     
     return YES;
 }
+
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 
@@ -46,5 +48,17 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
 
 }
+
+- (void)                    application:(UIApplication *)application
+    handleEventsForBackgroundURLSession:(NSString *)identifier
+                      completionHandler:(void (^)())completionHandler
+{
+//    UILocalNotification* locNot = [[UILocalNotification alloc] init];
+//    locNot.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+//    locNot.alertBody = [NSString stringWithFormat:@"still alive!"];
+//    locNot.timeZone = [NSTimeZone defaultTimeZone];
+//    [[UIApplication sharedApplication] scheduleLocalNotification:locNot];
+}
+
 
 @end
