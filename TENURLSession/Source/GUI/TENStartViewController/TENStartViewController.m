@@ -17,6 +17,11 @@
 @property (nonatomic, strong)   IBOutlet UIImageView    *middleImageView;
 @property (nonatomic, strong)   IBOutlet UIImageView    *bottomImageView;
 
+@property (nonatomic, strong)   IBOutlet UILabel        *countLabel;
+@property (strong, nonatomic)   IBOutlet UILabel        *currentLabel;
+
+@property (nonatomic, assign)   NSUInteger               currentIndexImage;
+
 @property (nonatomic, strong)   TENBackgroundServerContext  *backgroundServerContext;
 
 @end
@@ -48,6 +53,16 @@
     
     self.backgroundServerContext = backgroundServerContext;
 }
+- (IBAction)onNavigation:(UIButton *)sender {
+    NSInteger index = self.currentIndexImage + sender.tag;
+    NSArray *startImages = self.model.startImages;
+
+    if (index >= 0 && index < startImages.count) {
+        self.currentIndexImage = index;
+        self.middleImageView.image = startImages[index];
+        self.currentLabel.text = [NSString stringWithFormat:@"< %lu >", index];
+    }
+}
 
 #pragma mark -
 #pragma mark PDTModelObserver
@@ -57,9 +72,8 @@
         TENStartModel *model = self.model;
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.topImageView.image = model.topImage;
-            self.middleImageView.image = model.middleImage;
-            self.bottomImageView.image = model.bottomImage;
+            self.topImageView.image = model.startImages.lastObject;
+            self.countLabel.text = [NSString stringWithFormat:@"< %lu >", self.model.startImages.count];
         });
 
     }

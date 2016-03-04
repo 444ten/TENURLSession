@@ -9,16 +9,21 @@
 #import "TENBackgroundServerContext.h"
 
 static NSString * const kTENBackgroundSessionIdentifier = @"kTENBackgroundSessionIdentifier";
-static NSString * const kTENDownloadURLTop              = @"http://img-d.photosight.ru/457/6214458_xlarge.jpg";
-static NSString * const kTENDownloadURLMiddle           = @"http://img-c.photosight.ru/ed1/6214812_xlarge.jpg";
-static NSString * const kTENDownloadURLBottom           = @"http://img-3.photosight.ru/78f/5890550_xlarge.jpg";
+//static NSString * const kTENDownloadURLTop              = @"http://img-d.photosight.ru/457/6214458_xlarge.jpg";
+//static NSString * const kTENDownloadURLMiddle           = @"http://img-c.photosight.ru/ed1/6214812_xlarge.jpg";
+//static NSString * const kTENDownloadURLBottom           = @"http://img-3.photosight.ru/78f/5890550_xlarge.jpg";
+
+//static NSString * const kTENDownloadURLTop              = @"http://www.nastol.com.ua/large/201603/166645.jpg";
+//static NSString * const kTENDownloadURLMiddle           = @"http://www.nastol.com.ua/large/201603/166646.jpg";
+//static NSString * const kTENDownloadURLBottom           = @"http://www.nastol.com.ua/large/201603/166647.jpg";
+
+static const NSUInteger kTENStartImageNumber    = 166645;
+static const NSUInteger kTENMaxCount            = 62;
 
 @interface TENBackgroundServerContext () <NSURLSessionDownloadDelegate>
-@property (nonatomic, strong)   NSURLSessionDownloadTask *downloadTaskTop;
-@property (nonatomic, strong)   NSURLSessionDownloadTask *downloadTaskMiddle;
-@property (nonatomic, strong)   NSURLSessionDownloadTask *downloadTaskBottom;
+@property (nonatomic, assign)   NSUInteger  count;
+@property (nonatomic, strong)   NSURLSessionDownloadTask *downloadTask;
 
-@property (nonatomic, strong)   NSTimer                  *timer;
 @end
 
 @implementation TENBackgroundServerContext
@@ -44,10 +49,13 @@ static NSString * const kTENDownloadURLBottom           = @"http://img-3.photosi
 }
 
 - (void)execute {
-    NSURLSessionDownloadTask *downloadTaskTop = [[self backgroundSession] downloadTaskWithURL:[NSURL URLWithString:kTENDownloadURLTop]];
-    [downloadTaskTop resume];
+    NSString *stringURL =
+        [NSString stringWithFormat:@"http://www.nastol.com.ua/large/201603/%lu.jpg", self.count + kTENStartImageNumber];
     
-    self.downloadTaskTop = downloadTaskTop;
+    NSURLSessionDownloadTask *downloadTask = [[self backgroundSession] downloadTaskWithURL:[NSURL URLWithString:stringURL]];
+    [downloadTask resume];
+    
+    self.downloadTask = downloadTask;
 }
 
 - (void)cancel {
@@ -56,24 +64,6 @@ static NSString * const kTENDownloadURLBottom           = @"http://img-3.photosi
 
 #pragma mark -
 #pragma mark Private Methods
-
-- (void)contextLog {
-    NSLog(@"don't sleep");
-}
-
-- (void)executeMiddle {
-    NSURLSessionDownloadTask *downloadTaskMiddle = [[self backgroundSession] downloadTaskWithURL:[NSURL URLWithString:kTENDownloadURLMiddle]];
-    [downloadTaskMiddle resume];
-    
-    self.downloadTaskMiddle = downloadTaskMiddle;    
-}
-
-- (void)executeBootom {
-    NSURLSessionDownloadTask *downloadTaskBottom = [[self backgroundSession] downloadTaskWithURL:[NSURL URLWithString:kTENDownloadURLBottom]];
-    [downloadTaskBottom resume];
-    
-    self.downloadTaskBottom = downloadTaskBottom;
-}
 
 #pragma mark -
 #pragma mark NSURLSessionDownloadDelegate
@@ -97,18 +87,15 @@ static NSString * const kTENDownloadURLBottom           = @"http://img-3.photosi
     UIImage *image = [UIImage imageWithData:data];
     
     TENStartModel *model = self.model;
-
-    if (downloadTask == self.downloadTaskTop) {
-        model.topImage = image;
-        [self executeMiddle];
-    } else if (downloadTask == self.downloadTaskMiddle) {
-        model.middleImage = image;
-        [self executeBootom];
-    } else if (downloadTask == self.downloadTaskBottom) {
-        model.bottomImage = image;
-    }
+    [model addStartImage:image];
     
+    self.count += 1;
+
     model.state = PDTModelLoaded;
+    
+    if (self.count < kTENMaxCount) {
+        [self execute];
+    }    
 }
 
 @end

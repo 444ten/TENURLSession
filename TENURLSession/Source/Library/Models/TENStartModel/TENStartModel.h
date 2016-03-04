@@ -10,8 +10,8 @@
 #import "PDTModel.h"
 
 @interface TENStartModel : PDTModel
-@property (nonatomic, strong) UIImage *topImage;
-@property (nonatomic, strong) UIImage *middleImage;
-@property (nonatomic, strong) UIImage *bottomImage;
+@property (nonatomic, readonly)   NSArray<UIImage *> *startImages;
+
+- (void)addStartImage:(UIImage *)image;
 
 @end
