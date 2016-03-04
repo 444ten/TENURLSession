@@ -55,10 +55,10 @@ static NSString * const kTENDownloadURL                 = @"https://discussions.
               downloadTask:(NSURLSessionDownloadTask *)downloadTask
  didFinishDownloadingToURL:(NSURL *)location
 {
-    UIImage *image = [UIImage imageWithContentsOfFile:location.path];
- 
+    NSData *data = [NSData dataWithContentsOfFile:location.path];
+
     TENStartModel *model = self.model;
-    model.startImage = image;
+    model.startImage = [UIImage imageWithData:data];
     model.state = PDTModelLoaded;
 }
 

@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class TENStartModel;
+
 @interface TENStartViewController : UIViewController
+@property (nonatomic, strong)   TENStartModel   *model;
 
 @end

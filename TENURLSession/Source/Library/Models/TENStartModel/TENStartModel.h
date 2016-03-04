@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "PDTModel.h"
 
-
 @interface TENStartModel : PDTModel
 @property (nonatomic, strong) UIImage *startImage;
 

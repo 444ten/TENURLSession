@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TENStartViewController">
             <connections>
+                <outlet property="startImageView" destination="i2r-M4-ItT" id="zr8-8D-Fe9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,8 +22,17 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i2r-M4-ItT">
+                    <rect key="frame" x="56" y="81" width="263" height="505"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="i2r-M4-ItT" secondAttribute="bottom" constant="81" id="5WA-6S-atm"/>
+                <constraint firstItem="i2r-M4-ItT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="81" id="F1e-zX-Rne"/>
+                <constraint firstItem="i2r-M4-ItT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="56" id="M4t-uo-jdY"/>
+                <constraint firstAttribute="trailing" secondItem="i2r-M4-ItT" secondAttribute="trailing" constant="56" id="Nd7-iv-97n"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
         </view>
     </objects>
