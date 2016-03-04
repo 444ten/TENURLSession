@@ -8,11 +8,28 @@
 
 #import "TENStartViewController.h"
 
+#import "TENStartModel.h"
+#import "TENBackgroundServerContext.h"
+
 @interface TENStartViewController ()
+@property (nonatomic, strong)   TENBackgroundServerContext  *backgroundServerContext;
 
 @end
 
 @implementation TENStartViewController
+
+#pragma mark -
+#pragma mark View Lifecycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    TENBackgroundServerContext *backgroundServerContext = [TENBackgroundServerContext new];
+    backgroundServerContext.model = [TENStartModel new];
+    [backgroundServerContext execute];
+    
+    self.backgroundServerContext = backgroundServerContext;
+}
 
 
 @end

@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+#import "TENStartModel.h"
+
 @interface TENBackgroundServerContext : NSObject
+@property (nonatomic, strong)   TENStartModel   *model;
+
+- (void)execute;
+- (void)cancel;
 
 @end

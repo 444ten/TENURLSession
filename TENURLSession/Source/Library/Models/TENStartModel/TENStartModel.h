@@ -6,8 +6,11 @@
 //  Copyright © 2016 444ten. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "PDTModel.h"
 
+
 @interface TENStartModel : PDTModel
+@property (nonatomic, strong) UIImage *startImage;
 
 @end
