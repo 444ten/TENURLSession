@@ -12,6 +12,8 @@
 #import "TENStartModel.h"
 #import "TENBackgroundServerContext.h"
 
+static const NSUInteger kTENMaxCount    = 62;
+
 @interface TENStartViewController () <PDTModelObserver>
 @property (nonatomic, strong)   IBOutlet UIImageView    *topImageView;
 @property (nonatomic, strong)   IBOutlet UIImageView    *middleImageView;
@@ -20,9 +22,12 @@
 @property (nonatomic, strong)   IBOutlet UILabel        *countLabel;
 @property (strong, nonatomic)   IBOutlet UILabel        *currentLabel;
 
-@property (nonatomic, assign)   NSUInteger               currentIndexImage;
+@property (nonatomic, assign)   NSUInteger              currentIndexImage;
+@property (nonatomic, assign)   NSUInteger              imageNumber;
 
 @property (nonatomic, strong)   TENBackgroundServerContext  *backgroundServerContext;
+
+- (void)loadImage:(NSUInteger)imageNumber;
 
 @end
 
@@ -34,6 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.model = [TENStartModel new];
+    self.imageNumber = 0;
 }
 
 #pragma mark -
@@ -47,12 +53,9 @@
 #pragma mark Action Handling
 
 - (IBAction)onLoad:(UIButton *)sender {
-    TENBackgroundServerContext *backgroundServerContext = [TENBackgroundServerContext new];
-    backgroundServerContext.model = self.model;
-    [backgroundServerContext execute];
-    
-    self.backgroundServerContext = backgroundServerContext;
+    [self loadImage:self.imageNumber];
 }
+
 - (IBAction)onNavigation:(UIButton *)sender {
     NSInteger index = self.currentIndexImage + sender.tag;
     NSArray *startImages = self.model.startImages;
@@ -62,6 +65,15 @@
         self.middleImageView.image = startImages[index];
         self.currentLabel.text = [NSString stringWithFormat:@"< %lu >", index];
     }
+}
+
+- (void)loadImage:(NSUInteger)imageNumber {
+    TENBackgroundServerContext *backgroundServerContext = [TENBackgroundServerContext new];
+    backgroundServerContext.model = self.model;
+    backgroundServerContext.imageNumber = imageNumber;
+    [backgroundServerContext execute];
+    
+    self.backgroundServerContext = backgroundServerContext;
 }
 
 #pragma mark -
@@ -76,6 +88,12 @@
             self.countLabel.text = [NSString stringWithFormat:@"< %lu >", self.model.startImages.count];
         });
 
+        NSUInteger imageNumber = self.imageNumber + 1;
+        if (imageNumber < kTENMaxCount) {
+            [self loadImage:imageNumber];
+            
+            self.imageNumber = imageNumber;
+        }
     }
 }
 

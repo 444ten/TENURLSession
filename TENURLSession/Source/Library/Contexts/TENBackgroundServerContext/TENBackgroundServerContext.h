@@ -12,6 +12,7 @@
 
 @interface TENBackgroundServerContext : NSObject
 @property (nonatomic, strong)   TENStartModel   *model;
+@property (nonatomic, assign)   NSUInteger      imageNumber;
 
 - (void)execute;
 - (void)cancel;

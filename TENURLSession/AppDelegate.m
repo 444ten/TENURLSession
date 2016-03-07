@@ -23,11 +23,16 @@
     window.rootViewController = [TENStartViewController new];
     [window makeKeyAndVisible];
     
+    UIUserNotificationType types = UIUserNotificationTypeBadge |
+    UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    
+    UIUserNotificationSettings *mySettings =
+    [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+    
     return YES;
 }
-
-
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 
@@ -53,11 +58,7 @@
     handleEventsForBackgroundURLSession:(NSString *)identifier
                       completionHandler:(void (^)())completionHandler
 {
-//    UILocalNotification* locNot = [[UILocalNotification alloc] init];
-//    locNot.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
-//    locNot.alertBody = [NSString stringWithFormat:@"still alive!"];
-//    locNot.timeZone = [NSTimeZone defaultTimeZone];
-//    [[UIApplication sharedApplication] scheduleLocalNotification:locNot];
+    NSLog(@"...");
 }
 
 

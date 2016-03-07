@@ -9,16 +9,8 @@
 #import "TENBackgroundServerContext.h"
 
 static NSString * const kTENBackgroundSessionIdentifier = @"kTENBackgroundSessionIdentifier";
-//static NSString * const kTENDownloadURLTop              = @"http://img-d.photosight.ru/457/6214458_xlarge.jpg";
-//static NSString * const kTENDownloadURLMiddle           = @"http://img-c.photosight.ru/ed1/6214812_xlarge.jpg";
-//static NSString * const kTENDownloadURLBottom           = @"http://img-3.photosight.ru/78f/5890550_xlarge.jpg";
-
-//static NSString * const kTENDownloadURLTop              = @"http://www.nastol.com.ua/large/201603/166645.jpg";
-//static NSString * const kTENDownloadURLMiddle           = @"http://www.nastol.com.ua/large/201603/166646.jpg";
-//static NSString * const kTENDownloadURLBottom           = @"http://www.nastol.com.ua/large/201603/166647.jpg";
 
 static const NSUInteger kTENStartImageNumber    = 166645;
-static const NSUInteger kTENMaxCount            = 62;
 
 @interface TENBackgroundServerContext () <NSURLSessionDownloadDelegate>
 @property (nonatomic, assign)   NSUInteger  count;
@@ -50,7 +42,7 @@ static const NSUInteger kTENMaxCount            = 62;
 
 - (void)execute {
     NSString *stringURL =
-        [NSString stringWithFormat:@"http://www.nastol.com.ua/large/201603/%lu.jpg", self.count + kTENStartImageNumber];
+        [NSString stringWithFormat:@"http://www.nastol.com.ua/large/201603/%lu.jpg", self.imageNumber + kTENStartImageNumber];
     
     NSURLSessionDownloadTask *downloadTask = [[self backgroundSession] downloadTaskWithURL:[NSURL URLWithString:stringURL]];
     [downloadTask resume];
@@ -63,9 +55,6 @@ static const NSUInteger kTENMaxCount            = 62;
 }
 
 #pragma mark -
-#pragma mark Private Methods
-
-#pragma mark -
 #pragma mark NSURLSessionDownloadDelegate
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
@@ -75,9 +64,8 @@ static const NSUInteger kTENMaxCount            = 62;
         NSLog(@"success: %@", task);
     }
         
-//    self.downloadTask = nil;
+    self.downloadTask = nil;
 }
-
 
 - (void)        URLSession:(NSURLSession *)session
               downloadTask:(NSURLSessionDownloadTask *)downloadTask
@@ -85,6 +73,8 @@ static const NSUInteger kTENMaxCount            = 62;
 {
     NSData *data = [NSData dataWithContentsOfFile:location.path];
     UIImage *image = [UIImage imageWithData:data];
+
+    self.downloadTask = nil;
     
     TENStartModel *model = self.model;
     [model addStartImage:image];
@@ -95,7 +85,7 @@ static const NSUInteger kTENMaxCount            = 62;
     
     if (self.count < kTENMaxCount) {
         [self execute];
-    }    
+    }
 }
 
 @end
