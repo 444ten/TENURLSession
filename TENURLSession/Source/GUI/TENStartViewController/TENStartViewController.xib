@@ -11,6 +11,7 @@
                 <outlet property="countLabel" destination="mcJ-Bk-A8c" id="Qre-zi-Imo"/>
                 <outlet property="currentLabel" destination="D2b-C6-0Zh" id="UZR-Qh-xan"/>
                 <outlet property="middleImageView" destination="jzm-He-kNt" id="TTm-Ac-EtA"/>
+                <outlet property="requestCountLabel" destination="zxA-so-4ni" id="OCB-PS-kaj"/>
                 <outlet property="topImageView" destination="i2r-M4-ItT" id="Nxa-pf-vWc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -78,6 +79,12 @@
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D2b-C6-0Zh">
                     <rect key="frame" x="146" y="397" width="84" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zxA-so-4ni">
+                    <rect key="frame" x="122" y="638" width="132" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>

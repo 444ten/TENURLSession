@@ -11,6 +11,7 @@
 #import "PDTMacro.h"
 #import "TENStartModel.h"
 #import "TENBackgroundServerContext.h"
+#import "TENRequestContext.h"
 
 static const NSUInteger kTENMaxCount    = 62;
 
@@ -21,11 +22,13 @@ static const NSUInteger kTENMaxCount    = 62;
 
 @property (nonatomic, strong)   IBOutlet UILabel        *countLabel;
 @property (strong, nonatomic)   IBOutlet UILabel        *currentLabel;
+@property (strong, nonatomic)   IBOutlet UILabel        *requestCountLabel;
 
 @property (nonatomic, assign)   NSUInteger              currentIndexImage;
 @property (nonatomic, assign)   NSUInteger              imageNumber;
 
 @property (nonatomic, strong)   TENBackgroundServerContext  *backgroundServerContext;
+@property (nonatomic, strong)   TENRequestContext           *requestContext;
 
 - (void)loadImage:(NSUInteger)imageNumber;
 
@@ -40,6 +43,15 @@ static const NSUInteger kTENMaxCount    = 62;
     [super viewDidLoad];
     self.model = [TENStartModel new];
     self.imageNumber = 0;
+    
+    PDTModel *requestModel = [PDTModel new];
+    self.requestModel = requestModel;
+    
+    TENRequestContext *requestContext = [TENRequestContext new];
+    requestContext.model = requestModel;
+    [requestContext execute];
+    
+    self.requestContext = requestContext;
 }
 
 #pragma mark -
@@ -47,6 +59,10 @@ static const NSUInteger kTENMaxCount    = 62;
 
 - (void)setModel:(TENStartModel *)model {
     PDTObserverSetter(model)
+}
+
+- (void)setRequestModel:(PDTModel *)requestModel {
+    PDTObserverSetter(requestModel)
 }
 
 #pragma mark -
@@ -94,6 +110,15 @@ static const NSUInteger kTENMaxCount    = 62;
             
             self.imageNumber = imageNumber;
         }
+    } else if (model == self.requestModel) {
+        PDTModel *requestModel = [PDTModel new];
+        self.requestModel = requestModel;
+        
+        TENRequestContext *requestContext = [TENRequestContext new];
+        requestContext.model = requestModel;
+        [requestContext execute];
+        
+        self.requestContext = requestContext;
     }
 }
 

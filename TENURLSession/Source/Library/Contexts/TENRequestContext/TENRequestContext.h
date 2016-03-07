@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class PDTModel;
+
 @interface TENRequestContext : NSObject
+@property (nonatomic, strong)   PDTModel    *model;
+
+- (void)execute;
+- (void)cancel;
 
 @end

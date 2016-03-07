@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @class TENStartModel;
+@class PDTModel;
 
 @interface TENStartViewController : UIViewController
 @property (nonatomic, strong)   TENStartModel   *model;
+@property (nonatomic, strong)   PDTModel        *requestModel;
 
 @end
