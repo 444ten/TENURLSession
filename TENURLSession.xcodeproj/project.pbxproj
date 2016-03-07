@@ -19,6 +19,7 @@
 		76BDE56A1C89926100CB3A40 /* TENStartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BDE5691C89926100CB3A40 /* TENStartModel.m */; };
 		76BDE56D1C89985100CB3A40 /* PDTMacro.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BDE56C1C89985100CB3A40 /* PDTMacro.m */; };
 		76BDE5711C8DA22200CB3A40 /* TENRequestContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BDE5701C8DA22200CB3A40 /* TENRequestContext.m */; };
+		76BDE5751C8DD8FB00CB3A40 /* TENRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76BDE5741C8DD8FB00CB3A40 /* TENRequestModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,8 @@
 		76BDE56C1C89985100CB3A40 /* PDTMacro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDTMacro.m; sourceTree = "<group>"; };
 		76BDE56F1C8DA22200CB3A40 /* TENRequestContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TENRequestContext.h; sourceTree = "<group>"; };
 		76BDE5701C8DA22200CB3A40 /* TENRequestContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TENRequestContext.m; sourceTree = "<group>"; };
+		76BDE5731C8DD8FB00CB3A40 /* TENRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TENRequestModel.h; sourceTree = "<group>"; };
+		76BDE5741C8DD8FB00CB3A40 /* TENRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TENRequestModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +159,7 @@
 		76BDE55D1C89918E00CB3A40 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				76BDE5721C8DD8F000CB3A40 /* TENRequestModel */,
 				76BDE5671C89925200CB3A40 /* TENStartModel */,
 				76BDE55E1C89918E00CB3A40 /* PDTModel */,
 			);
@@ -204,6 +208,15 @@
 				76BDE5701C8DA22200CB3A40 /* TENRequestContext.m */,
 			);
 			path = TENRequestContext;
+			sourceTree = "<group>";
+		};
+		76BDE5721C8DD8F000CB3A40 /* TENRequestModel */ = {
+			isa = PBXGroup;
+			children = (
+				76BDE5731C8DD8FB00CB3A40 /* TENRequestModel.h */,
+				76BDE5741C8DD8FB00CB3A40 /* TENRequestModel.m */,
+			);
+			path = TENRequestModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76BDE5711C8DA22200CB3A40 /* TENRequestContext.m in Sources */,
+				76BDE5751C8DD8FB00CB3A40 /* TENRequestModel.m in Sources */,
 				76BDE56A1C89926100CB3A40 /* TENStartModel.m in Sources */,
 				76BDE5611C89918E00CB3A40 /* PDTModel.m in Sources */,
 				76BDE5551C88A4CC00CB3A40 /* TENStartViewController.m in Sources */,
