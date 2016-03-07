@@ -9,5 +9,6 @@
 #import "PDTModel.h"
 
 @interface TENRequestModel : PDTModel
+@property (nonatomic, assign)   NSUInteger requestCount;
 
 @end

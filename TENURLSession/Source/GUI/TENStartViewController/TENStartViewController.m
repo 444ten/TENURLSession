@@ -10,6 +10,7 @@
 
 #import "PDTMacro.h"
 #import "TENStartModel.h"
+#import "TENRequestModel.h"
 #import "TENBackgroundServerContext.h"
 #import "TENRequestContext.h"
 
@@ -41,14 +42,12 @@ static const NSUInteger kTENMaxCount    = 62;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.requestModel = [TENRequestModel new];
     self.model = [TENStartModel new];
     self.imageNumber = 0;
     
-    PDTModel *requestModel = [PDTModel new];
-    self.requestModel = requestModel;
-    
     TENRequestContext *requestContext = [TENRequestContext new];
-    requestContext.model = requestModel;
+    requestContext.model = self.requestModel;
     [requestContext execute];
     
     self.requestContext = requestContext;
@@ -61,7 +60,7 @@ static const NSUInteger kTENMaxCount    = 62;
     PDTObserverSetter(model)
 }
 
-- (void)setRequestModel:(PDTModel *)requestModel {
+- (void)setRequestModel:(TENRequestModel *)requestModel {
     PDTObserverSetter(requestModel)
 }
 
@@ -111,11 +110,11 @@ static const NSUInteger kTENMaxCount    = 62;
             self.imageNumber = imageNumber;
         }
     } else if (model == self.requestModel) {
-        PDTModel *requestModel = [PDTModel new];
-        self.requestModel = requestModel;
+        
+        self.requestCountLabel.text = [NSString stringWithFormat:@"Request #%lu", self.requestModel.requestCount];
         
         TENRequestContext *requestContext = [TENRequestContext new];
-        requestContext.model = requestModel;
+        requestContext.model = self.requestModel;
         [requestContext execute];
         
         self.requestContext = requestContext;

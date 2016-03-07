@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@class PDTModel;
+@class TENRequestModel;
 
 @interface TENRequestContext : NSObject
-@property (nonatomic, strong)   PDTModel    *model;
+@property (nonatomic, strong)   TENRequestModel *model;
 
 - (void)execute;
 - (void)cancel;

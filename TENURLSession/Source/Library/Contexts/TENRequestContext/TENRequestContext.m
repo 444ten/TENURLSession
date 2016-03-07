@@ -9,7 +9,7 @@
 #import "TENRequestContext.h"
 
 #import "PDTMacro.h"
-#import "PDTModel.h"
+#import "TENRequestModel.h"
 
 typedef void (^PDTBaseUrlCompletionHandler)(NSData *data, NSURLResponse *response, NSError *error);
 
@@ -71,7 +71,7 @@ typedef void (^PDTBaseUrlCompletionHandler)(NSData *data, NSURLResponse *respons
 }
 
 - (BOOL)parseResult:(NSDictionary *)result {
-    NSLog(@"...");
+    NSLog(@"Request #%lu", self.model.requestCount);
     
     return YES;
 }
@@ -92,9 +92,10 @@ typedef void (^PDTBaseUrlCompletionHandler)(NSData *data, NSURLResponse *respons
         
         BOOL success = !error && !parseError && dictionary && [self parseResult:dictionary];
         
-        PDTModel *model = self.model;
-        model.state = success ? PDTModelLoaded : PDTModelDidFailLoad;
+        TENRequestModel *model = self.model;
+        model.requestCount += 1;
         
+        model.state = success ? PDTModelLoaded : PDTModelDidFailLoad;
         if (!success) {
             NSLog(@"! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! %@ error ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !", NSStringFromClass([self class]));
         }
