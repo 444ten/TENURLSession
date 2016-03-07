@@ -8,6 +8,8 @@
 
 #import "TENBackgroundServerContext.h"
 
+#import "AppDelegate.h"
+
 static NSString * const kTENBackgroundSessionIdentifier = @"kTENBackgroundSessionIdentifier";
 
 static const NSUInteger kTENStartImageNumber    = 166645;
@@ -24,20 +26,28 @@ static const NSUInteger kTENStartImageNumber    = 166645;
 #pragma mark Public Methods
 
 - (NSURLSession *)backgroundSession {
-    static NSURLSession *session = nil;
+//    static NSURLSession *session = nil;
+//    
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        NSURLSessionConfiguration *configuration =
+//            [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:kTENBackgroundSessionIdentifier];
+//        configuration.allowsCellularAccess = YES;
+//        
+//        session = [NSURLSession sessionWithConfiguration:configuration
+//                                                delegate:self
+//                                           delegateQueue:nil];
+//    });
+//    
+//    return session;
+
+    NSString *identifier = [NSString stringWithFormat:@"%@%lu", kTENBackgroundSessionIdentifier, self.imageNumber];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:identifier];
+    configuration.allowsCellularAccess = YES;
     
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        NSURLSessionConfiguration *configuration =
-            [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:kTENBackgroundSessionIdentifier];
-        configuration.allowsCellularAccess = YES;
-        
-        session = [NSURLSession sessionWithConfiguration:configuration
-                                                delegate:self
-                                           delegateQueue:nil];
-    });
-    
-    return session;
+    return  [NSURLSession sessionWithConfiguration:configuration
+                                          delegate:self
+                                     delegateQueue:nil];
 }
 
 - (void)execute {
@@ -65,6 +75,17 @@ static const NSUInteger kTENStartImageNumber    = 166645;
     }
         
     self.downloadTask = nil;
+    
+    self.model.state = PDTModelLoaded;
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    if (appDelegate.backgroundSessionCompletionHandler == nil) {
+        return;
+    }
+    
+    void (^comletionHandler)() = appDelegate.backgroundSessionCompletionHandler;
+    appDelegate.backgroundSessionCompletionHandler = nil;
+    comletionHandler();
 }
 
 - (void)        URLSession:(NSURLSession *)session
@@ -73,19 +94,9 @@ static const NSUInteger kTENStartImageNumber    = 166645;
 {
     NSData *data = [NSData dataWithContentsOfFile:location.path];
     UIImage *image = [UIImage imageWithData:data];
-
-    self.downloadTask = nil;
     
     TENStartModel *model = self.model;
     [model addStartImage:image];
-    
-    self.count += 1;
-
-    model.state = PDTModelLoaded;
-    
-    if (self.count < kTENMaxCount) {
-        [self execute];
-    }
 }
 
 @end

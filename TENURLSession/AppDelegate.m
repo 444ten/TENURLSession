@@ -58,7 +58,15 @@
     handleEventsForBackgroundURLSession:(NSString *)identifier
                       completionHandler:(void (^)())completionHandler
 {
-    NSLog(@"...");
+    NSLog(@"...%@", identifier);
+
+    UILocalNotification* locNot = [[UILocalNotification alloc] init];
+    locNot.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+    locNot.alertBody = [NSString stringWithFormat:@"still alive!"];
+    locNot.timeZone = [NSTimeZone defaultTimeZone];
+    [[UIApplication sharedApplication] scheduleLocalNotification:locNot];
+    
+    self.backgroundSessionCompletionHandler = completionHandler;
 }
 
 
