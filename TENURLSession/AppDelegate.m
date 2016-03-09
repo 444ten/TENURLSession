@@ -61,9 +61,12 @@
     NSLog(@"...%@", identifier);
 
     UILocalNotification* locNot = [[UILocalNotification alloc] init];
-    locNot.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+    locNot.fireDate = [NSDate dateWithTimeIntervalSinceNow:0.5];
     locNot.alertBody = [NSString stringWithFormat:@"still alive!"];
     locNot.timeZone = [NSTimeZone defaultTimeZone];
+    locNot.soundName = UILocalNotificationDefaultSoundName;
+//    locNot.alertAction = @"common...";
+    locNot.applicationIconBadgeNumber = 2;
     [[UIApplication sharedApplication] scheduleLocalNotification:locNot];
     
     self.backgroundSessionCompletionHandler = completionHandler;

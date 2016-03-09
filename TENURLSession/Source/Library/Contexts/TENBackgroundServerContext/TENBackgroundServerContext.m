@@ -41,7 +41,7 @@ static const NSUInteger kTENStartImageNumber    = 166645;
 //    
 //    return session;
 
-    NSString *identifier = [NSString stringWithFormat:@"%@%lu", kTENBackgroundSessionIdentifier, self.imageNumber];
+    NSString *identifier = [NSString stringWithFormat:@"%@%d", kTENBackgroundSessionIdentifier, 0]; //self.imageNumber
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:identifier];
     configuration.allowsCellularAccess = YES;
     

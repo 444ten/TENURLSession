@@ -46,11 +46,11 @@ static const NSUInteger kTENMaxCount    = 62;
     self.model = [TENStartModel new];
     self.imageNumber = 0;
     
-    TENRequestContext *requestContext = [TENRequestContext new];
-    requestContext.model = self.requestModel;
-    [requestContext execute];
+//    TENRequestContext *requestContext = [TENRequestContext new];
+//    requestContext.model = self.requestModel;
+//    [requestContext execute];
     
-    self.requestContext = requestContext;
+//    self.requestContext = requestContext;
 }
 
 #pragma mark -
